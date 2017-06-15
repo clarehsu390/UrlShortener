@@ -1,0 +1,17 @@
+require 'launchy'
+
+puts "enter your email: "
+email = gets.chomp
+user = User.find_by(email: email)
+puts user
+puts "Do you want to go somewhere or make a thing"
+choose = gets.chomp
+
+if choose == "make a thing"
+  puts ShortenedUrl.create!(user, "http://www.google.com")
+else
+  puts "Where u wanna go?"
+  url = gets.chomp
+  Launchy.open("http://www.google.com")
+  Visit.record_visit!(user, ShortenedUrl.find_by(long_url: "http://www.google.com"))
+end
