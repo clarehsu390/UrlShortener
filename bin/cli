@@ -8,9 +8,11 @@ puts "Do you want to go somewhere or make a thing"
 choose = gets.chomp
 
 if choose == "make a thing"
-  puts ShortenedUrl.create!(user, "http://www.google.com")
+  ShortenedUrl.create!(user, "http://www.google.com")
+  s = ShortenedUrl.find_by(long_url: "http://www.google.com")
+  puts s.short_url
 else
-  puts "Where u wanna go?"
+  puts "where u wanna go"
   url = gets.chomp
   Launchy.open("http://www.google.com")
   Visit.record_visit!(user, ShortenedUrl.find_by(long_url: "http://www.google.com"))
